@@ -4,12 +4,15 @@ create table db_school.student(
     id     int auto_increment primary key comment 'id PK',
   -- 字段名 数据类型 [数据范围] [约束] 注释,
     sno    varchar(255) unique comment '学号',
+    gender varchar(255) default 'male' comment '性别',
     name   varchar(255) comment '学生姓名',
     age    int(2) comment '年龄',
     height double(3, 2) not null comment '身高 x.yz 米',
     dob    date comment '出生年月日 Date Of Birth',
     departmentID int comment '院系ID'
 )comment '学生表';
+alter table db_school.student auto_increment=10000;
+
 drop table if exists db_school.department;
 create table db_school.department(
   id int auto_increment primary key comment 'id pk',
@@ -21,10 +24,12 @@ from db_school.department;
 
  -- 为学生版追加外键约束
 alter table db_school.student
-add constraint
+add constraint -- 别名  表明_fk_列名
 student_fk_departmentID
 foreign key (departmentID)
 references db_school.department(id);
+# on delete cascade; -- 级联删除
+# on delete set null; -- 级联置空
 select *
 from db_school.student;
 desc db_school.student;
@@ -41,6 +46,8 @@ from db_school.department;
 insert into db_school.department value (null,'CS','010-12345678');
 insert into db_school.department value (null,'SS','010-12345679');
 insert into db_school.department value (null,'EE','010-12345680');
+
+delete from db_school.department;-- 删除department表所有数据
 select s.name,d.title
 from db_school.student s
 inner join db_school.department d
