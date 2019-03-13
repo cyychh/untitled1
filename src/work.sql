@@ -29,4 +29,46 @@ from emp where comm>0;
 select *
 from scott.emp
 where COMM<100 or COMM is null;
+
+
 # 9. 查找员工雇佣日期是当月的最后一天的员工信息
+select *
+from scott.emp where HIREDATE=last_day(HIREDATE);
+# 10. 检索出雇佣年限超过 35 年的员工信息
+
+# 11. 找出姓名以 A、B、S 开始的员工信息
+select *
+from scott.emp where ENAME like'A%' or ENAME like 'B%' or ENAME like 'S%';
+# 12. 找到名字长度为 4 个字符的员工信息
+select *
+from emp where length(ENAME)=4;
+# 13. 名字中不包含 R 字符的员工信息
+select *
+from emp where ENAME not like '%R%';
+# 14. 找出员工名字的前3个字符
+select substr(ENAME,1,3)from emp;
+# 15. 将名字中 A 改为 a
+select replace(ENAME,'A','a')from emp;
+# 16. 将员工的雇佣日期拖后 10 年
+
+# 17. 返回员工的详细信息并按姓名排序
+select *
+from scott.emp
+order by ENAME asc;
+# 18. 返回员工的信息并按员工的工作年限降序排列
+select *
+from emp
+order by HIREDATE desc ;
+# 19. 返回员工的信息并按工作降序、工资升序排列
+select *
+from emp
+order by SAL asc,JOB desc ;
+# 20. 返回员工的姓名、雇佣年份和月份，并按月份和雇佣日期排序
+select ENAME,HIREDATE
+from emp
+order by ENAME;
+# 21. 计算员工的日薪，每月按 30 天
+# 22. 找出 2 月份雇佣的员工
+# 23. 至今为止，员工被雇佣的天数
+# 24. 找出姓名中包含 A 的员工信息
+# 25. 计算出员工被雇佣了多少年、多少月、多少日

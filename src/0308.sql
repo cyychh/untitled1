@@ -76,3 +76,23 @@ where EMPNO='7499';
 -- 计算员工总收入
 select ENAME,sal+ifnull(COMM,0) -- 如果奖金空，工资加0；奖金不为0，工资加奖金
 from scott.emp;
+
+select e.ENAME,e.DEPTNO,d.DNAME,d.DEPTNO
+from scott.emp e inner join  scott.dept d  -- inner join 内部连接(可省略inner）
+on e.DEPTNO=d.DEPTNO;
+
+-- 运行后共52条数据（13*4）
+
+-- 内部连接基础之上显示落选的数据
+select e.ENAME,d.DNAME
+from scott.emp e left outer join scott.dept d   -- 左外连接(outer可省略）显示KING
+on e.DEPTNO =d.DEPTNO
+union  -- 连接左右外连接，KING和OPERTIONS都显示
+select e.ENAME,d.DNAME
+from scott.emp e right outer join scott.dept d  -- 右外连接 显示OPERTIONS
+on e.DEPTNO=d.DEPTNO;
+
+
+
+
+
